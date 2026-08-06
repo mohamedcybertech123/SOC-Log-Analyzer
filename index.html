@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SOC Log Analyzer</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         SIDEBAR
+         ========================================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            🛡️ SOC Analyzer
+        </div>
+
+        <nav>
+            <a href="#" class="active">Dashboard</a>
+            <a href="#alerts">Security Alerts</a>
+            <a href="#events">Log Events</a>
+            <a href="#detection">Detection Rules</a>
+        </nav>
+
+        <div class="system-status">
+            <span class="status-dot"></span>
+            System Online
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================
+         MAIN DASHBOARD
+         ========================================= -->
+
+    <main class="dashboard">
+
+
+        <!-- =====================================
+             HEADER
+             ===================================== -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <p class="label">
+                    SECURITY OPERATIONS
+                </p>
+
+                <h1>
+                    SOC Log Analyzer
+                </h1>
+
+                <p class="subtitle">
+                    Monitor authentication activity and detect
+                    suspicious login behavior.
+                </p>
+
+            </div>
+
+            <div class="live-status">
+                ● MONITORING
+            </div>
+
+        </header>
+
+
+        <!-- =====================================
+             STATISTICS
+             ===================================== -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <p>Total Events</p>
+
+                <h2 id="totalEvents">
+                    0
+                </h2>
+
+                <span>
+                    Authentication logs
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>Failed Logins</p>
+
+                <h2 id="failedLogins">
+                    0
+                </h2>
+
+                <span>
+                    Detected failures
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>Security Alerts</p>
+
+                <h2 id="totalAlerts">
+                    0
+                </h2>
+
+                <span>
+                    Requires attention
+                </span>
+
+            </div>
+
+
+            <div class="stat-card critical-card">
+
+                <p>Critical Alerts</p>
+
+                <h2 id="criticalAlerts">
+                    0
+                </h2>
+
+                <span>
+                    Immediate investigation
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             SECURITY ALERTS
+             ===================================== -->
+
+        <section class="panel" id="alerts">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <p class="label">
+                        THREAT DETECTION
+                    </p>
+
+                    <h2>
+                        Recent Security Alerts
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- JavaScript creates the alerts here -->
+
+            <div id="alertsContainer">
+
+                <p class="loading-message">
+                    Analyzing security events...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             LOG EVENTS
+             ===================================== -->
+
+        <section class="panel" id="events">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <p class="label">
+                        EVENT MONITOR
+                    </p>
+
+                    <h2>
+                        Recent Log Events
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Time</th>
+                            <th>Event</th>
+                            <th>User</th>
+                            <th>Source IP</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                10:21:15
+                            </td>
+
+                            <td>
+                                LOGIN_SUCCESS
+                            </td>
+
+                            <td>
+                                admin
+                            </td>
+
+                            <td>
+                                192.168.1.25
+                            </td>
+
+                            <td class="danger-text">
+                                Suspicious
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                10:21:08
+                            </td>
+
+                            <td>
+                                LOGIN_FAILED
+                            </td>
+
+                            <td>
+                                admin
+                            </td>
+
+                            <td>
+                                192.168.1.25
+                            </td>
+
+                            <td class="warning-text">
+                                Failed
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                10:20:57
+                            </td>
+
+                            <td>
+                                LOGIN_FAILED
+                            </td>
+
+                            <td>
+                                admin
+                            </td>
+
+                            <td>
+                                192.168.1.25
+                            </td>
+
+                            <td class="warning-text">
+                                Failed
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                10:15:21
+                            </td>
+
+                            <td>
+                                LOGIN_SUCCESS
+                            </td>
+
+                            <td>
+                                amal
+                            </td>
+
+                            <td>
+                                192.168.1.10
+                            </td>
+
+                            <td class="success-text">
+                                Normal
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             DETECTION RULES
+             ===================================== -->
+
+        <section class="panel" id="detection">
+
+            <p class="label">
+                DETECTION ENGINE
+            </p>
+
+            <h2>
+                Active Detection Rules
+            </h2>
+
+
+            <div class="rules">
+
+
+                <!-- RULE 1 -->
+
+                <div class="rule">
+
+                    <span>
+                        01
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Repeated Login Failures
+                        </h3>
+
+                        <p>
+                            5 or more failed attempts trigger
+                            a security alert.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RULE 2 -->
+
+                <div class="rule">
+
+                    <span>
+                        02
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Possible Brute Force
+                        </h3>
+
+                        <p>
+                            10 or more failed attempts trigger
+                            a high severity alert.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RULE 3 -->
+
+                <div class="rule">
+
+                    <span>
+                        03
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Possible Account Compromise
+                        </h3>
+
+                        <p>
+                            A successful login after repeated
+                            failures triggers a critical alert.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             FOOTER
+             ===================================== -->
+
+        <footer>
+
+            <p>
+                SOC Log Analyzer • Cybersecurity Monitoring Project
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

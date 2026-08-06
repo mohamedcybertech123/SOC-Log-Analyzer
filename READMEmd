@@ -1,0 +1,188 @@
+# SOC Log Analyzer
+
+SOC Log Analyzer is a cybersecurity project I built to practice security monitoring, log analysis, and basic threat detection.
+
+The project analyzes authentication logs and looks for suspicious login activity such as repeated failed login attempts, possible brute-force attacks, and successful logins that happen after multiple failures.
+
+I first built the detection logic in Python and then created a web-based SOC dashboard using HTML, CSS, and JavaScript to make the results easier to understand and visualize.
+
+## Features
+
+- Reads and analyzes authentication log data
+- Counts successful and failed login attempts
+- Tracks failed login attempts by IP address
+- Identifies targeted user accounts
+- Detects repeated failed login attempts
+- Detects possible brute-force activity
+- Detects successful logins after multiple failures
+- Assigns severity levels to security alerts
+- Displays security statistics on a SOC-style dashboard
+- Automatically generates alerts from the sample log data
+
+## Detection Rules
+
+The project currently uses a few simple detection rules.
+
+### Low Severity
+
+1–4 failed login attempts from the same IP address are recorded as failed login activity.
+
+### Medium Severity
+
+5–9 failed login attempts from the same IP address trigger a repeated login failure alert.
+
+### High Severity
+
+10 or more failed login attempts from the same IP address trigger a possible brute-force attack alert.
+
+### Critical Severity
+
+If a successful login happens after 5 or more consecutive failed attempts from the same IP address, the system generates a critical alert for possible account compromise.
+
+These rules are intentionally simple because this project is designed as a learning project rather than a production SOC or SIEM system.
+
+## Example Detection
+
+An example of suspicious activity in the sample logs:
+
+```text
+LOGIN_FAILED user=admin ip=192.168.1.25
+LOGIN_FAILED user=admin ip=192.168.1.25
+LOGIN_FAILED user=admin ip=192.168.1.25
+...
+LOGIN_SUCCESS user=admin ip=192.168.1.25
+```
+
+The analyzer identifies the repeated failures and can generate alerts such as:
+
+```text
+[HIGH] Possible Brute Force Attack
+
+Source IP: 192.168.1.25
+Target Account: admin
+Failed Attempts: 12
+```
+
+If the same IP successfully logs in after those failures, it can also generate:
+
+```text
+[CRITICAL] Successful Login After Multiple Failures
+
+Source IP: 192.168.1.25
+Account: admin
+Previous Failed Attempts: 12
+```
+
+## Technologies Used
+
+- Python
+- HTML
+- CSS
+- JavaScript
+- Visual Studio Code
+- Git
+- GitHub
+
+## Project Structure
+
+```text
+SOC-Log-Analyzer/
+│
+├── index.html
+├── style.css
+├── script.js
+├── soc_analyzer.py
+├── sample_logs.txt
+└── README.md
+```
+
+### `soc_analyzer.py`
+
+Contains the Python version of the SOC log analyzer and detection logic.
+
+### `sample_logs.txt`
+
+Contains synthetic authentication events used to safely test the detection rules.
+
+### `index.html`
+
+Contains the structure of the SOC dashboard.
+
+### `style.css`
+
+Contains the styling and responsive dashboard design.
+
+### `script.js`
+
+Reads the sample logs, analyzes the authentication activity, calculates statistics, and generates security alerts for the web dashboard.
+
+## Running the Python Analyzer
+
+Make sure Python is installed.
+
+Open a terminal inside the project folder and run:
+
+```bash
+python soc_analyzer.py
+```
+
+The analyzer will read `sample_logs.txt` and display the detected activity and security alerts in the terminal.
+
+## Running the Dashboard
+
+Because the dashboard loads `sample_logs.txt` using JavaScript, it should be opened through a local web server rather than directly through a `file://` URL.
+
+One option is to use the Live Server extension in Visual Studio Code.
+
+Open `index.html` and select:
+
+```text
+Open with Live Server
+```
+
+The SOC dashboard will then load in your browser and analyze the sample log data.
+
+## What I Learned
+
+Building this project helped me understand how security logs can be used to identify suspicious behavior.
+
+I practiced:
+
+- Security log analysis
+- Authentication monitoring
+- Brute-force detection
+- Basic SOC alert logic
+- IP-based event correlation
+- Alert severity classification
+- Python dictionaries and loops
+- JavaScript event/data processing
+- HTML and CSS dashboard development
+- Git and GitHub version control
+
+One of the main things I learned from this project is that individual security events may not look particularly suspicious on their own. Looking at multiple related events together can reveal patterns that may require investigation.
+
+## Limitations
+
+This is an educational cybersecurity project and is not intended to replace a production SIEM or SOC monitoring platform.
+
+The current detection rules are based on simple thresholds and synthetic authentication logs. A real security monitoring environment would require more advanced correlation, time-based detection, larger datasets, additional log sources, and methods for reducing false positives.
+
+## Future Improvements
+
+Some features I may add in the future include:
+
+- Log file upload
+- Time-based brute-force detection
+- Alert filtering
+- Search functionality
+- Additional authentication attack patterns
+- Charts and security event visualization
+- Exportable incident reports
+- Support for additional log formats
+- More advanced detection rules
+
+## Security Note
+
+The log data included with this repository is synthetic and was created for testing and educational purposes.
+
+No real user credentials, authentication logs, or private network information are required to run the project.
